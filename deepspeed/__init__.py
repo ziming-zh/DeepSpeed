@@ -68,6 +68,7 @@ dist = None
 # Module-level variable to track initialization
 _deepspeed_initialized = False
 
+
 def initialize(args=None,
                model: torch.nn.Module = None,
                optimizer: Optional[Union[Optimizer, DeepSpeedOptimizerCallable]] = None,
@@ -137,12 +138,12 @@ def initialize(args=None,
 
     # Disable zero.Init context if it's currently enabled
     zero.partition_parameters.shutdown_init_context()
-    
+
     global _deepspeed_initialized  # Access the module-level variable
-    
+
     if _deepspeed_initialized:
         raise RuntimeError("DeepSpeed has already been initialized. `initialize` can only be called once.")
-    
+
     # Mark as initialized
     _deepspeed_initialized = True
 
